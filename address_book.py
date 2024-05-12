@@ -44,9 +44,12 @@ class Record:
 
         return result
 
-    def remove_phone(self, phone):
-        phone_value = self.find_phone(phone)
-        self.phones.remove(phone_value)
+    def remove_phone(self, phone_need_to_remove):
+        phone = self.find_phone(phone_need_to_remove)
+        if not phone:
+            raise ValueError("No such phone number")
+
+        self.phones.remove(phone)
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
